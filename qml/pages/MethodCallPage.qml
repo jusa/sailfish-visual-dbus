@@ -78,6 +78,8 @@ Page {
                     var result = dbusInspector.callMethod(serviceName, isSystemBus, servicePath,
                                                           interfaceName, method.name, arguments);
                     outputTextArea.text = result.length === 0 ? 'No response' : result;
+                    console.log("===== Execute " + interfaceName + "." + method.name + " =====")
+                    console.log(result)
                 }
             }
             SectionHeader {
