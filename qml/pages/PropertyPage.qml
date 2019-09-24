@@ -75,9 +75,7 @@ Page {
             Label {
                 id: valueLabel
                 width: parent.width
-                text: property.access === "write" ? "Property cannot be read" : "Value: "
-                                                    + dbusInspector.getInterfaceProperty(serviceName, servicePath,
-                                                                                         interfaceName, property.name, isSystemBus)
+                text: ""
                 font.pixelSize: Theme.fontSizeLarge
                 wrapMode: Text.Wrap
             }
@@ -103,11 +101,24 @@ Page {
                 onClicked: {
                     dbusInspector.setInterfaceProperty(serviceName, servicePath, interfaceName,
                                                        property.name, isSystemBus, newValueArea.text);
-                    valueLabel.text = "Value: " + dbusInspector.getInterfaceProperty(serviceName, servicePath,
-                                                                                     interfaceName, property.name, isSystemBus)
+                    updateValueLabel()
                 }
             }
         }
         VerticalScrollDecorator { }
+
+        function updateValueLabel() {
+            if (property.access === "write") {
+                valueLabel.text = "Property cannot be read"
+            } else {
+                valueLabel.text = "Value: " + dbusInspector.getInterfacePropertyAsString(serviceName, servicePath,
+                                                                                         interfaceName, property.name,
+                                                                                         isSystemBus)
+            }
+        }
+
+        Component.onCompleted: {
+            updateValueLabel()
+        }
     }
 }
