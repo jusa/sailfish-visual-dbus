@@ -23,6 +23,8 @@ public:
                                    QString methodName, QList<QVariant> arguments);
     Q_INVOKABLE QVariant getInterfaceProperty(QString serviceName, QString path, QString interfaceName,
                                               QString propertyName, bool isSystemBus);
+    Q_INVOKABLE QString getInterfacePropertyAsString(QString serviceName, QString path, QString interfaceName,
+                                                     QString propertyName, bool isSystemBus);
     Q_INVOKABLE bool setInterfaceProperty(QString serviceName, QString path, QString interfaceName,
                                           QString propertyName, bool isSystemBus, QVariant value);
 private:

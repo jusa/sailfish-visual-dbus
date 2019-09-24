@@ -172,6 +172,21 @@ QVariant DBusServiceInspector::getInterfaceProperty(QString serviceName, QString
 }
 
 /*!
+ * Returns the value of the given property of the given interface as string.
+ * \param serviceName The name of the service to get the property.
+ * \param path Path to the interface to get the property on.
+ * \param interfaceName Name of the interface that contains the property.
+ * \param propertyName Name of the property for which value are required.
+ * \param isSystemBus Whether the service is registered in system bus or not.
+ * \return value of the property
+ */
+QString DBusServiceInspector::getInterfacePropertyAsString(QString serviceName, QString path, QString interfaceName,
+                                                           QString propertyName, bool isSystemBus) {
+    QVariant value = getInterfaceProperty(serviceName, path, interfaceName, propertyName, isSystemBus);
+    return DBusUtil::argumentToString(value);
+}
+
+/*!
  * Sets the value of the given property of the given interface.
  * \param serviceName The name of the service to set the property.
  * \param path Path to the interface to set the property on.
